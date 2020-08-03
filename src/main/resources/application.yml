@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/demo
+    username: postgres
+    password: postgres
+  jpa:
+    generate-ddl: true
+    show_sql: true
+    properties:
+      hibernate:
+      jdbc.lob.non_contextual_creation: true
+spring.jpa.hibernate.ddl-auto: create-drop
