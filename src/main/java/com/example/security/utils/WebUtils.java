@@ -1,10 +1,12 @@
-package com.brainacad.security.utils;
+package com.example.security.utils;
 
 import java.util.Collection;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+@UtilityClass
 public class WebUtils {
 
     public static String toString(User user) {

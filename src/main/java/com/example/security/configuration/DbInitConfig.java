@@ -1,11 +1,11 @@
-package com.brainacad.security;
+package com.example.security.configuration;
 
-import com.brainacad.security.dao.RoleRepository;
-import com.brainacad.security.dao.UserRoleRepository;
-import com.brainacad.security.dao.UserRepository;
-import com.brainacad.security.entity.AppUser;
-import com.brainacad.security.entity.Role;
-import com.brainacad.security.entity.UserRole;
+import com.example.security.repository.RoleRepository;
+import com.example.security.repository.UserRoleRepository;
+import com.example.security.repository.UserRepository;
+import com.example.security.entity.AppUser;
+import com.example.security.entity.Role;
+import com.example.security.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;

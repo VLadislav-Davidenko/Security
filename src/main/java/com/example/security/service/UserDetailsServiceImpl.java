@@ -1,12 +1,15 @@
-package com.brainacad.security.service;
+package com.example.security.service;
 
 
-import com.brainacad.security.dao.UserRoleRepository;
-import com.brainacad.security.dao.UserRepository;
-import com.brainacad.security.entity.AppUser;
+import com.example.security.repository.UserRoleRepository;
+import com.example.security.repository.UserRepository;
+import com.example.security.entity.AppUser;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,19 +24,17 @@ import javax.transaction.Transactional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserRoleRepository userRoleRepository;
+    private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         AppUser appUser = this.userRepository.findUserAccount(userName)
-            .orElseThrow(() -> new RuntimeException());
+            .orElseThrow(RuntimeException::new);
 
         if (appUser == null) {
            log.error("User not found! " + userName);
@@ -47,11 +48,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         List<GrantedAuthority> grantList = new ArrayList<>();
         if (roleNames != null) {
-            for (String role : roleNames) {
-                // ROLE_USER, ROLE_ADMIN,..
-                GrantedAuthority authority = new SimpleGrantedAuthority(role);
-                grantList.add(authority);
-            }
+            grantList = roleNames.stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
         }
 
         return new User(appUser.getUserName(), appUser.getEncrytedPassword(), grantList);

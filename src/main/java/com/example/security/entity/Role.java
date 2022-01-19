@@ -1,4 +1,4 @@
-package com.brainacad.security.entity;
+package com.example.security.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

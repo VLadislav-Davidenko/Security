@@ -1,10 +1,12 @@
-package com.brainacad.security.utils;
+package com.example.security.utils;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class EncrytedPasswordUtils {
+@UtilityClass
+public class EncryptPasswordUtils {
 
-    // Encryte Password with BCryptPasswordEncoder
+    // Encryt Password with BCryptPasswordEncoder
     public static String encrytePassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);
